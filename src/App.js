@@ -1,25 +1,27 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import Header from "./components/header";
+import Intro from "./components/intro";
+import ScheduleForm from "./components/schedule";
+// BOOTSTRAP IMPORTS
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Header />
+      <Container>
+        <Row>
+          <Col sm={2}></Col>
+          <Col sm={8}>
+            <Intro />
+            <ScheduleForm />
+          </Col>
+        </Row>
+      </Container>
+    </React.Fragment>
   );
 }
 
