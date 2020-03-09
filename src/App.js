@@ -3,11 +3,13 @@ import "./App.css";
 import Header from "./components/header";
 import Intro from "./components/intro";
 import ScheduleForm from "./components/schedule";
+import YelpItem from "./components/yelp-item";
+//import GoogleMap from "./components/map";
+
 // BOOTSTRAP IMPORTS
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import YelpItem from "./components/yelp-item";
 
 class App extends Component {
   state = {
@@ -18,6 +20,18 @@ class App extends Component {
     buttonClicked: false,
     restaurantNames: [],
     restaurantLocations: []
+  };
+
+  resetState = () => {
+    this.setState({
+      activitiesString: "",
+      activitiesList: [],
+      categories: [],
+      error: "",
+      buttonClicked: false,
+      restaurantNames: [],
+      restaurantLocations: []
+    });
   };
 
   addRestaurantNames = names => {
@@ -166,6 +180,7 @@ class App extends Component {
               />
               {this.state.categories === null ? null : (
                 <YelpItem
+                  reset={this.resetState}
                   addRestaurantLocations={this.addRestaurantLocations}
                   addRestaurantNames={this.addRestaurantNames}
                   restaurantNames={this.state.restaurantNames}
@@ -174,11 +189,14 @@ class App extends Component {
                   categories={this.state.categories}
                 />
               )}
+              <br></br>
             </Col>
           </Row>
         </Container>
       </React.Fragment>
-    );
+    ); //{this.state.restaurantLocations.length === 0 ? null : (
+    //  <GoogleMap apiKey="AIzaSyCerlxJJOMYNUkZn3y9yd0TwUy07qB0vD8" />
+    //)}
   }
 }
 

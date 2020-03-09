@@ -63,9 +63,11 @@ class YelpItem extends Component {
     this.props.toggleButton();
   };
   componentDidUpdate = () => {
-    if (this.props.buttonClicked) {
+    if (this.props.buttonClicked && this.props.categories.length !== 0) {
       this.fetchResponse(this.props.categories[0]);
       this.props.toggleButton();
+    } else if (this.props.buttonClicked) {
+      this.props.reset();
     }
   };
   render() {
