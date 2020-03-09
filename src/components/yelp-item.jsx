@@ -16,8 +16,6 @@ class YelpItem extends Component {
     } else if (category === 1) {
       categories =
         "african,arabian,breakfast_brunch,burgers,chicken_wings,chinese,comfortfood,hotdogs,greek,halal,indian,italian,kebab,mexican,mideastern,pizza,soulfood,thai";
-    } else if (category === 2) {
-      categories = "opensandwiches,vegetarian,salad";
     } else {
       return null;
     }
@@ -53,6 +51,7 @@ class YelpItem extends Component {
         ];
         this.props.addRestaurantNames(names);
         this.props.addRestaurantLocations(locations);
+        console.log(res);
       })
       .catch(err => {
         console.log(err);
@@ -65,23 +64,23 @@ class YelpItem extends Component {
   };
   componentDidUpdate = () => {
     if (this.props.buttonClicked) {
-      this.fetchResponse(this.props.categories[0]).then(data => {
-        console.log(data);
-      });
+      this.fetchResponse(this.props.categories[0]);
       this.props.toggleButton();
     }
   };
   render() {
-    const categories = this.props.categories;
+    var categories = this.props.categories;
     return (
       <div>
         {categories.length !== 0 ? (
           <React.Fragment>
             <br></br>
-            <ListGroup>
-              <ListGroup.Item>{this.props.restaurantNames[0]}</ListGroup.Item>
-              <ListGroup.Item>{this.props.restaurantNames[1]}</ListGroup.Item>
-              <ListGroup.Item>{this.props.restaurantNames[2]}</ListGroup.Item>
+            <ListGroup variant="primary">
+              <div style={{ textAlign: "center" }}>
+                <ListGroup.Item>{this.props.restaurantNames[0]}</ListGroup.Item>
+                <ListGroup.Item>{this.props.restaurantNames[1]}</ListGroup.Item>
+                <ListGroup.Item>{this.props.restaurantNames[2]}</ListGroup.Item>
+              </div>
             </ListGroup>
           </React.Fragment>
         ) : (

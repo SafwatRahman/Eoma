@@ -40,8 +40,7 @@ class App extends Component {
 
     this.setState(
       {
-        activitiesList: this.state.activitiesString.split(","),
-        buttonClicked: true
+        activitiesList: this.state.activitiesString.split(",")
       },
       () => {
         this.findFoodCategory(this.state.activitiesList);
@@ -67,7 +66,25 @@ class App extends Component {
       "lecture",
       "class",
       "school",
-      "meeting"
+      "meeting",
+      "exam",
+      "test",
+      "presentation",
+      "interview",
+      "phone interview",
+      "finals",
+      "midterm",
+      "final",
+      "midterms",
+      "first date",
+      "performance",
+      "gym",
+      "working out",
+      "hiking",
+      "biking",
+      "running",
+      "athletics",
+      "sports"
     ];
     const leisureWordBank = [
       "relaxing",
@@ -81,22 +98,15 @@ class App extends Component {
       "unemployed",
       "bored",
       "tv",
-      "stress relief"
+      "stress relief",
+      "sleeping",
+      "watching movies",
+      "playing videogames",
+      "videogames",
+      "hanging out",
+      "party"
     ];
-    const stressWordBank = [
-      "exam",
-      "test",
-      "presentation",
-      "interview",
-      "phone interview",
-      "finals",
-      "midterm",
-      "final",
-      "midterms",
-      "first date",
-      "performance"
-    ];
-    const wordBanks = [productivityWordBank, leisureWordBank, stressWordBank];
+    const wordBanks = [productivityWordBank, leisureWordBank];
 
     var categories = [];
     // loop through each bank
@@ -123,10 +133,14 @@ class App extends Component {
 
     categoryUpdate
       .then(categories => {
-        this.setState({ categories: categories, error: "" });
+        this.setState({
+          categories: categories,
+          error: "",
+          buttonClicked: true
+        });
       })
       .catch(err => {
-        this.setState({ categories: [], error: err });
+        this.setState({ categories: [], error: err, buttonClicked: true });
       });
   };
   toggleButton = () => {
@@ -152,6 +166,7 @@ class App extends Component {
                 <YelpItem
                   addRestaurantLocations={this.addRestaurantLocations}
                   addRestaurantNames={this.addRestaurantNames}
+                  restaurantNames={this.state.restaurantNames}
                   toggleButton={this.toggleButton}
                   buttonClicked={this.state.buttonClicked}
                   categories={this.state.categories}
