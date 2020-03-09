@@ -104,7 +104,9 @@ class App extends Component {
       "playing videogames",
       "videogames",
       "hanging out",
-      "party"
+      "party",
+      "gaming",
+      "sex"
     ];
     const wordBanks = [productivityWordBank, leisureWordBank];
 
@@ -114,7 +116,7 @@ class App extends Component {
       for (let i = 0; i < wordBanks.length; ++i) {
         // check if bank contains activity
         for (let j = 0; j < activities.length; ++j) {
-          if (wordBanks[i].includes(activities[j].trim())) {
+          if (wordBanks[i].includes(activities[j].toLowerCase().trim())) {
             categories.push(i); // record which bank the activity belongs to
             break; // if found, move to next bank
           } else {

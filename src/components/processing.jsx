@@ -59,7 +59,8 @@ class Processing extends Component {
     for (let i = 0; i < wordBanks.length; ++i) {
       // check if bank contains activity
       for (let j = 0; j < activities.length; ++j) {
-        if (wordBanks[i].includes(activities[j].trim())) {
+        let activityString = activities[j].trim().toLowerCase();
+        if (wordBanks[i].includes(activityString)) {
           categories.push(i); // record which bank the activity belongs to
           break; // if found, move to next bank
         } else {
