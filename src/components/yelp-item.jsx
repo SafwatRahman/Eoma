@@ -45,10 +45,35 @@ class YelpItem extends Component {
           res.data.businesses[k].name
         ];
         var locations = [
-          res.data.businesses[i].location.address1,
-          res.data.businesses[j].location.address1,
-          res.data.businesses[k].location.address1
+          [
+            res.data.businesses[i].coordinates.latitude,
+            res.data.businesses[i].coordinates.longitude
+          ],
+          [
+            res.data.businesses[j].coordinates.latitude,
+            res.data.businesses[j].coordinates.longitude
+          ],
+          [
+            res.data.businesses[k].coordinates.latitude,
+            res.data.businesses[k].coordinates.longitude
+          ]
         ];
+        var ratings = [
+          res.data.businesses[i].rating,
+          res.data.businesses[j].rating,
+          res.data.businesses[k].rating
+        ];
+        var prices = [
+          res.data.businesses[i].price,
+          res.data.businesses[j].price,
+          res.data.businesses[k].price
+        ];
+        var displayPhones = [
+          res.data.businesses[i].display_phone,
+          res.data.businesses[j].display_phone,
+          res.data.businesses[k].display_phone
+        ];
+        this.props.addRestaurantDetails(prices, ratings, displayPhones);
         this.props.addRestaurantNames(names);
         this.props.addRestaurantLocations(locations);
         console.log(res);

@@ -4,7 +4,8 @@ import Header from "./components/header";
 import Intro from "./components/intro";
 import ScheduleForm from "./components/schedule";
 import YelpItem from "./components/yelp-item";
-//import GoogleMap from "./components/map";
+import GoogleMap from "./components/map";
+import Footer from "./components/footer";
 
 // BOOTSTRAP IMPORTS
 import Container from "react-bootstrap/Container";
@@ -19,9 +20,27 @@ class App extends Component {
     error: "",
     buttonClicked: false,
     restaurantNames: [],
-    restaurantLocations: []
+    restaurantLocations: [],
+    userCoordinates: [],
+    ratings: [],
+    prices: [],
+    phoneNumbers: []
   };
 
+  getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.showPosition);
+    } else {
+      console.log("geolocation not support");
+    }
+  };
+  showPosition = position => {
+    this.setState({
+      userCoordinates: [position.coords.latitude, position.coords.longitude]
+    });
+    console.log(position.coords.latitude);
+    console.log(position.coords.longitude);
+  };
   resetState = () => {
     this.setState({
       activitiesString: "",
@@ -30,10 +49,21 @@ class App extends Component {
       error: "",
       buttonClicked: false,
       restaurantNames: [],
-      restaurantLocations: []
+      restaurantLocations: [],
+      userCoordinates: [],
+      ratings: [],
+      prices: [],
+      phoneNumbers: []
     });
   };
 
+  addRestaurantDetails = (prices, ratings, phoneNumbers) => {
+    this.setState({
+      ratings: ratings,
+      prices: prices,
+      phoneNumbers: phoneNumbers
+    });
+  };
   addRestaurantNames = names => {
     this.setState({
       restaurantNames: names
@@ -51,7 +81,7 @@ class App extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-
+    this.getLocation();
     this.setState(
       {
         activitiesList: this.state.activitiesString.split(",")
@@ -171,8 +201,8 @@ class App extends Component {
         <Header />
         <Container>
           <Row>
-            <Col sm={2}></Col>
-            <Col sm={8}>
+            <Col sm={3}></Col>
+            <Col sm={6}>
               <Intro />
               <ScheduleForm
                 onChange={this.handleChange}
@@ -183,6 +213,7 @@ class App extends Component {
                   reset={this.resetState}
                   addRestaurantLocations={this.addRestaurantLocations}
                   addRestaurantNames={this.addRestaurantNames}
+                  addRestaurantDetails={this.addRestaurantDetails}
                   restaurantNames={this.state.restaurantNames}
                   toggleButton={this.toggleButton}
                   buttonClicked={this.state.buttonClicked}
@@ -190,13 +221,24 @@ class App extends Component {
                 />
               )}
               <br></br>
+              {this.state.restaurantLocations.length === 0 ||
+              this.state.userCoordinates.length === 0 ? null : (
+                <GoogleMap
+                  userCoordinates={this.state.userCoordinates}
+                  restaurantCoordinates={this.state.restaurantLocations}
+                  restaurantNames={this.state.restaurantNames}
+                  ratings={this.state.ratings}
+                  prices={this.state.prices}
+                  phoneNumbers={this.state.phoneNumbers}
+                  apiKey="AIzaSyCerlxJJOMYNUkZn3y9yd0TwUy07qB0vD8"
+                />
+              )}
             </Col>
           </Row>
         </Container>
+        <Footer></Footer>
       </React.Fragment>
-    ); //{this.state.restaurantLocations.length === 0 ? null : (
-    //  <GoogleMap apiKey="AIzaSyCerlxJJOMYNUkZn3y9yd0TwUy07qB0vD8" />
-    //)}
+    );
   }
 }
 
