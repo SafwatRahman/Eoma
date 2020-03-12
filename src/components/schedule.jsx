@@ -11,9 +11,7 @@ class ScheduleForm extends Component {
             onChange={this.props.onChange}
             placeholder="meeting, relaxing, class, nothing, etc."
           />
-          <Form.Text className="text-muted">
-            Enter a comma separated list of your upcoming events
-          </Form.Text>
+          <Form.Text className="text-muted"></Form.Text>
         </Form.Group>
         <div style={{ textAlign: "center" }}>
           <Button

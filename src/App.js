@@ -32,7 +32,7 @@ class App extends Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition);
     } else {
-      console.log("geolocation not support");
+      alert("Failed to get your location");
     }
   };
   showPosition = position => {
@@ -133,7 +133,8 @@ class App extends Component {
       "biking",
       "running",
       "athletics",
-      "sports"
+      "sports",
+      "sex"
     ];
     const leisureWordBank = [
       "relaxing",
@@ -154,8 +155,7 @@ class App extends Component {
       "videogames",
       "hanging out",
       "party",
-      "gaming",
-      "sex"
+      "gaming"
     ];
     const wordBanks = [productivityWordBank, leisureWordBank];
 
