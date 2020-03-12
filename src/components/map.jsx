@@ -59,6 +59,9 @@ export class GoogleMap extends Component {
           }}
         >
           <Marker
+            icon={{
+              url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+            }}
             onClick={this.onMarkerClick}
             name={"Current Location"}
             position={{

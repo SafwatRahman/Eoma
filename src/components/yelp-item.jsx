@@ -9,7 +9,6 @@ class YelpItem extends Component {
   };
 
   async fetchResponse(category) {
-    this.props.toggleLoading();
     var categories = "";
     if (category === 0) {
       categories =

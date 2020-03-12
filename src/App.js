@@ -89,7 +89,8 @@ class App extends Component {
     event.preventDefault();
     this.setState(
       {
-        activitiesList: this.state.activitiesString.split(",")
+        activitiesList: this.state.activitiesString.split(","),
+        isLoading: !this.state.isLoading
       },
       () => {
         this.getLocation();
