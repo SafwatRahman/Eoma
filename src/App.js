@@ -24,7 +24,8 @@ class App extends Component {
     userCoordinates: [],
     ratings: [],
     prices: [],
-    phoneNumbers: []
+    phoneNumbers: [],
+    isLoading: false
   };
 
   getLocation = () => {
@@ -35,9 +36,14 @@ class App extends Component {
     }
   };
   showPosition = position => {
-    this.setState({
-      userCoordinates: [position.coords.latitude, position.coords.longitude]
-    });
+    this.setState(
+      {
+        userCoordinates: [position.coords.latitude, position.coords.longitude]
+      },
+      () => {
+        this.findFoodCategory(this.state.activitiesList);
+      }
+    );
     console.log(position.coords.latitude);
     console.log(position.coords.longitude);
   };
@@ -81,13 +87,12 @@ class App extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-    this.getLocation();
     this.setState(
       {
         activitiesList: this.state.activitiesString.split(",")
       },
       () => {
-        this.findFoodCategory(this.state.activitiesList);
+        this.getLocation();
       }
     );
   };
@@ -194,6 +199,11 @@ class App extends Component {
       buttonClicked: !this.state.buttonClicked
     });
   };
+  toggleLoading = () => {
+    this.setState({
+      isLoading: !this.state.isLoading
+    });
+  };
 
   render() {
     return (
@@ -207,6 +217,7 @@ class App extends Component {
               <ScheduleForm
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
+                isLoading={this.state.isLoading}
               />
               {this.state.categories === null ? null : (
                 <YelpItem
@@ -218,6 +229,8 @@ class App extends Component {
                   toggleButton={this.toggleButton}
                   buttonClicked={this.state.buttonClicked}
                   categories={this.state.categories}
+                  coordinates={this.state.userCoordinates}
+                  toggleLoading={this.toggleLoading}
                 />
               )}
               <br></br>

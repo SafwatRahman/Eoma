@@ -9,10 +9,11 @@ class YelpItem extends Component {
   };
 
   async fetchResponse(category) {
+    this.props.toggleLoading();
     var categories = "";
     if (category === 0) {
       categories =
-        "french,japanese,korean,raw_food,opensandwiches,rotisserie_chicken,salad,sandwiches,seafood,sushi,vegan,vegetarian";
+        "raw_food,opensandwiches,rotisserie_chicken,salad,sandwiches,seafood,sushi,vegan,vegetarian";
     } else if (category === 1) {
       categories =
         "african,arabian,breakfast_brunch,burgers,chicken_wings,chinese,comfortfood,hotdogs,greek,halal,indian,italian,kebab,mexican,mideastern,pizza,soulfood,thai";
@@ -30,7 +31,8 @@ class YelpItem extends Component {
           Authorization: token
         },
         params: {
-          location: 53715,
+          latitude: this.props.coordinates[0],
+          longitude: this.props.coordinates[1],
           categories: categories,
           sort_by: "distance"
         }
@@ -76,6 +78,7 @@ class YelpItem extends Component {
         this.props.addRestaurantDetails(prices, ratings, displayPhones);
         this.props.addRestaurantNames(names);
         this.props.addRestaurantLocations(locations);
+        this.props.toggleLoading();
         console.log(res);
       })
       .catch(err => {

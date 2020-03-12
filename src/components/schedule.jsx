@@ -16,8 +16,12 @@ class ScheduleForm extends Component {
           </Form.Text>
         </Form.Group>
         <div style={{ textAlign: "center" }}>
-          <Button variant="primary" type="submit">
-            Find me food!
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={this.props.isLoading}
+          >
+            {this.props.isLoading ? "Loading..." : "Find me food!"}
           </Button>
         </div>
       </Form>
