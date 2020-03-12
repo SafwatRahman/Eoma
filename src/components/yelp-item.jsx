@@ -95,6 +95,7 @@ class YelpItem extends Component {
       this.props.toggleButton();
     } else if (this.props.buttonClicked) {
       this.props.reset();
+      this.props.toggleLoading();
     }
   };
   render() {
