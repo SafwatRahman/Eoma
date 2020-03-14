@@ -99,6 +99,12 @@ class App extends Component {
   };
   findFoodCategory = activities => {
     const productivityWordBank = [
+      "excercise",
+      "excercising",
+      "climbing",
+      "skating",
+      "working out",
+      "work out",
       "work",
       "working",
       "busy",
@@ -127,6 +133,7 @@ class App extends Component {
       "final",
       "midterms",
       "first date",
+      "date",
       "performance",
       "gym",
       "working out",
@@ -138,6 +145,8 @@ class App extends Component {
       "sex"
     ];
     const leisureWordBank = [
+      "partying",
+
       "relaxing",
       "free",
       "nothing",
