@@ -5,7 +5,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 class YelpItem extends Component {
   state = {
-    restaurantNames: []
+    restaurantNames: [],
   };
 
   async fetchResponse(category) {
@@ -27,52 +27,52 @@ class YelpItem extends Component {
     axios
       .get(yelpSearchUrl, {
         headers: {
-          Authorization: token
+          Authorization: token,
         },
         params: {
           latitude: this.props.coordinates[0],
           longitude: this.props.coordinates[1],
           categories: categories,
-          sort_by: "distance"
-        }
+          sort_by: "distance",
+        },
       })
-      .then(res => {
+      .then((res) => {
         var i = Math.floor(Math.random() * 5);
         var j = Math.floor(Math.random() * 6) + 5;
         var k = Math.floor(Math.random() * 8) + 12;
         var names = [
           res.data.businesses[i].name,
           res.data.businesses[j].name,
-          res.data.businesses[k].name
+          res.data.businesses[k].name,
         ];
         var locations = [
           [
             res.data.businesses[i].coordinates.latitude,
-            res.data.businesses[i].coordinates.longitude
+            res.data.businesses[i].coordinates.longitude,
           ],
           [
             res.data.businesses[j].coordinates.latitude,
-            res.data.businesses[j].coordinates.longitude
+            res.data.businesses[j].coordinates.longitude,
           ],
           [
             res.data.businesses[k].coordinates.latitude,
-            res.data.businesses[k].coordinates.longitude
-          ]
+            res.data.businesses[k].coordinates.longitude,
+          ],
         ];
         var ratings = [
           res.data.businesses[i].rating,
           res.data.businesses[j].rating,
-          res.data.businesses[k].rating
+          res.data.businesses[k].rating,
         ];
         var prices = [
           res.data.businesses[i].price,
           res.data.businesses[j].price,
-          res.data.businesses[k].price
+          res.data.businesses[k].price,
         ];
         var displayPhones = [
           res.data.businesses[i].display_phone,
           res.data.businesses[j].display_phone,
-          res.data.businesses[k].display_phone
+          res.data.businesses[k].display_phone,
         ];
         this.props.addRestaurantDetails(prices, ratings, displayPhones);
         this.props.addRestaurantNames(names);
@@ -80,14 +80,19 @@ class YelpItem extends Component {
         this.props.toggleLoading();
         console.log(res);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
 
   componentDidMount = () => {
-    this.fetchResponse(this.props.categories[0]);
-    this.props.toggleButton();
+    if (this.props.buttonClicked && this.props.categories.length !== 0) {
+      this.fetchResponse(this.props.categories[0]);
+      this.props.toggleButton();
+    } else if (this.props.buttonClicked) {
+      this.props.reset();
+      this.props.toggleLoading();
+    }
   };
   componentDidUpdate = () => {
     if (this.props.buttonClicked && this.props.categories.length !== 0) {
