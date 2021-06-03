@@ -19,7 +19,7 @@ class YelpItem extends Component {
     } else {
       return null;
     }
-    var herokuCors = "https://mighty-springs-65777.herokuapp.com";
+    var herokuCors = "https://mighty-springs-65777.herokuapp.com/";
     var token =
       "Bearer UWiqua6ixuPdUltcuWlZA6hLhotDLXq1CbDnLzf44kw9bWJkTlX-DBc1COu68AAape4J8z_WTN5J4aSKNa2-0qp1H04UcNaxJk70hkVZ7IwqLk4C3bRFXN2Hn7dlXnYx";
     var yelpSearchUrl =
