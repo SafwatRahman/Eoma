@@ -1,1 +1,1 @@
-Currently deployed at https://eoma-capital-one.herokuapp.com
+A web app to help decide what to eat based on your schedule.
